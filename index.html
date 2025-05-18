@@ -615,12 +615,45 @@
         padding: 2.5rem;
         backdrop-filter: blur(10px);
         border: 1px solid var(--card-border);
-        height: 100%;
+        height: auto;
+        min-height: 280px;
         position: relative;
     }
+@media (max-width: 576px) {
+  /* Slider-Padding verkleinern */
+  .testimonial-slider {
+    padding: 1rem 0;
+  }
+
+  /* Slide selbst ohne zusätzlichen Abstand */
+  .testimonial-slide {
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Karte schmaler machen, automatischer Inhaltshöhe */
+  .testimonial-card {
+    padding: 1rem;
+    min-height: auto;
+    max-width: calc(100% - 1rem);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Textlesbarkeit leicht anpassen */
+  .testimonial-content {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  /* Steuer-Buttons enger zusammenrücken */
+  .slider-controls {
+    margin-top: 1rem;
+  }
+}
     
     .testimonial-card::before {
-        content: '"';
+        content: '„';
         position: absolute;
         top: 20px;
         left: 20px;
@@ -735,7 +768,6 @@
         background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(45, 45, 45, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a0a"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%232d2d2d" stroke-width="1"/></svg>');
         background-size: cover;
         text-align: center;
-        padding: 8rem 1.5rem;
     }
     
     .cta-title {
@@ -1107,18 +1139,36 @@
         /* Mobile: Tech-Layers Grafik nach vorn holen und sichtbar machen */
     @media (max-width: 576px) {
       .tech-layers {
-        height: 300px;
+        height: auto !important;
+        overflow: visible !important;
         z-index: 3;
       }
 
       .tech-layer svg {
-        transform: scale(1.1);
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
       }
 
       .technology .container {
         display: flex;
         flex-direction: column-reverse;
       }
+      /* Mobil: Grafik näher an Stats und mehr Abstand zur nächsten Section */
+      .technology .tech-content {
+        gap: 1rem !important;
+      }
+      .technology .tech-layers {
+        margin-bottom: 2rem !important;
+      }
+    }
+    /* Zeige die gesamte Grafik der Technologie-Section */
+    .technology {
+      overflow: visible !important;
+    }
+    /* Mobil: mehr Abstand über der Testimonials-Überschrift */
+    #testimonials .section-title {
+      margin-top: 2rem !important;
     }
     @media (max-width: 576px) {
       .testimonial-info h4 {
@@ -1421,6 +1471,7 @@
                         </g>
                     </svg>
                 </div>
+                <div class="sparkle-container"></div>
             </div>
         </div>
     </div>
@@ -1447,7 +1498,7 @@
                       </div>
                     </div>
                     <div class="testimonial-content" style="font-size: 0.9rem; line-height: 1.4;">
-                      "MELA.AI erkennt <br>Hautkrebs zuverlässig"
+                      „MELA.AI erkennt Hautkrebs zuverlässig“
                     </div>
                   </div>
                 </div>
@@ -1463,7 +1514,7 @@
                       </div>
                     </div>
                     <div class="testimonial-content">
-                      "Die Analyse ist viel <br>genauer als alles, was ich<br>bisher kannte."
+                      „Die Analyse ist viel genauer als alles, <br>was ich bisher kannte.“
                     </div>
                   </div>
                 </div>
@@ -1471,15 +1522,15 @@
                   <div class="testimonial-card">
                     <div class="testimonial-author">
                       <div class="testimonial-avatar">
-                        <img src="Scientist3.0.png" alt="Xe Draven" style="width: 100%; height: 100%; object-fit: cover; object-position: center 80%; transform: scale(1.1); border-radius: 50%;" />
+                        <img src="Scientist3.0.png" alt="Xe Draven" style="width: 100%; height: 100%; object-fit: cover; object-position: center 1%; transform: scale(1.1); border-radius: 50%;" />
                       </div>
                       <div class="testimonial-info">
                         <h4>Xe Draven</h4>
                         <p>Krankenpfleger</p>
                       </div>
                     </div>
-                    <div class="testimonial-content" style="font-size: 1rem; line-height: 1.5;">
-                      „Ich vertraue dem BODYSCOPE nicht nur, weil er alles sieht – sondern weil er niemanden übersieht.“
+                    <div class="testimonial-content" style="font-size: 0.9rem; line-height: 1.4;">
+                      „Ich vertraue dem BODYSCOPE nicht <br>nur, weil er alles sieht – sondern weil <br>er niemanden übersieht.“
                     </div>
                   </div>
                 </div>
@@ -1504,7 +1555,7 @@
 </section>
 
 <!-- CTA Section -->
-<section id="contact" class="cta pt-2">
+<section id="contact" class="cta pt-0">
   <div class="scanline"></div>
   <div class="grid-bg"></div>
   <div class="container text-center">
@@ -1572,7 +1623,56 @@
     transform: scale(1.05);
     transition: all 0.3s ease;
   }
-</style>
+  #testimonials {
+    padding-bottom: 0 !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+  }
+  #contact {
+    padding-top: 0 !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+  }
+    @keyframes sparkle {
+      0%   { transform: scale(0.5); opacity: 0; }
+      50%  { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(0.5); opacity: 0; }
+    }
+    .sparkle-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, var(--primary-color) 0%, var(--secondary-color) 80%, rgba(255,255,255,0) 100%);
+      border-radius: 50%;
+      opacity: 0;
+      filter: blur(2px);
+      animation: sparkle 2s ease-in-out forwards;
+    }
+
+    /* Mobile: größere und schärfere Sparkles */
+    @media (max-width: 576px) {
+      .sparkle {
+        width: 12px !important;
+        height: 12px !important;
+        filter: blur(3px) !important;
+        animation-duration: 1.5s !important;
+      }
+      .sparkle-container {
+        overflow: visible !important;
+        z-index: 10 !important;
+      }
+    }
+    </style>
 
 <!-- Footer -->
 <footer>
@@ -1757,7 +1857,31 @@
         
         // Parallax effect for tech layers
         const techLayers = document.getElementById('techLayers');
-        
+
+        // Sparkle-Effekt initialisieren
+        const sparkleContainer = document.createElement('div');
+        sparkleContainer.className = 'sparkle-container';
+        techLayers.appendChild(sparkleContainer);
+
+        setInterval(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          // zufällige Größe für extra Holo-Effekt
+          const size = Math.random() * 8 + 4; 
+          sparkle.style.width = `${size}px`;
+          sparkle.style.height = `${size}px`;
+          // Position
+          const x = Math.random() * techLayers.clientWidth;
+          const y = Math.random() * techLayers.clientHeight;
+          sparkle.style.left = `${x}px`;
+          sparkle.style.top = `${y}px`;
+          // optional: leicht rotieren
+          sparkle.style.transform = `rotate(${Math.random() * 360}deg)`;
+          sparkleContainer.appendChild(sparkle);
+          // Entfernen nach voller Animationsdauer
+          setTimeout(() => sparkle.remove(), 2000);
+        }, 400);
+
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
             const techSection = document.getElementById('technology');
@@ -1788,8 +1912,10 @@
             } else if (index >= slides.length) {
                 index = 0;
             }
-            
-            track.style.transform = `translateX(-${index * 100}%)`;
+            // Berechne die tatsächliche Breite eines Slides in Pixel
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            // Verschiebe den Track um die Slide-Breite mal Index
+            track.style.transform = `translateX(-${slideWidth * index}px)`;
             currentIndex = index;
             
             // Update dots
@@ -1837,6 +1963,12 @@
                     goToSlide(index);
                 }
             });
+        });
+
+        // Slider: Bei Fenster-Resize die aktuelle Position beibehalten
+        window.addEventListener('resize', () => {
+          const slideWidth = slides[0].getBoundingClientRect().width;
+          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
         });
         
         // Touch swipe for testimonials
